@@ -1,0 +1,76 @@
+def main():
+    print("请选择输入模式：")
+    print("1: 单个输入")
+    print("2: 整列输入")
+
+    input_mode = input("请输入模式（1/2）：")
+
+    if input_mode not in ['1', '2']:
+        print("无效的模式选择，程序将退出。")
+        return
+
+    print("请选择分组模式：")
+    print("1: 16个一组")
+    print("2: 64个一组")
+    print("3: 27个一组")
+
+    mode = input("请输入模式（1/2/3）：")
+
+    if mode == '1':
+        group_size = 16
+    elif mode == '2':
+        group_size = 64
+    elif mode == '3':
+        group_size = 27
+    else:
+        print("无效的模式选择，程序将退出。")
+        return
+
+    if input_mode == '1':
+        # 单个输入模式
+        while True:
+            user_input = input("请输入一个数（或输入 'exit' 退出）：")
+            if user_input.lower() == 'exit':
+                print("程序已退出。")
+                break
+
+            try:
+                number = int(user_input)
+            except ValueError:
+                print("请输入一个有效的整数。")
+                continue
+
+            a = number // group_size
+            b = number % group_size
+            print(f"{a}组{b}个")
+
+    elif input_mode == '2':
+        # 整列输入模式
+        numbers = []
+        print("请输入数字（每个数字后按回车，最后输入 'over' 开始计算）：")
+
+        while True:
+            user_input = input()
+            if user_input.lower() == 'over':
+                break
+
+            try:
+                number = int(user_input)
+                numbers.append(number)
+            except ValueError:
+                print("请输入一个有效的整数。")
+
+        # 计算并输出结果
+        results = []
+        for number in numbers:
+            a = number // group_size
+            b = number % group_size
+            results.append(f"{a}组{b}个")
+
+        print("计算结果：")
+        for result in results:
+            print(result)
+
+
+if __name__ == "__main__":
+    main()
